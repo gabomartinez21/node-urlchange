@@ -3,12 +3,20 @@ const express = require('express');
 const path = require('path');
 const routes = require('./router')
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const app = express();
 
 
 //Habilitar el body-parser para leer los datos del formulario
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extend:true}))
+
+
+//Conectar Mongo
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/acortadorUrl',{
+     useNewUrlParser:true
+})
 
 // /Habilitar pug
 app.set('view engine', 'pug');
